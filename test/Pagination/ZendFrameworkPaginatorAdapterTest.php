@@ -1,4 +1,5 @@
 <?php
+
 namespace League\Fractal\Test\Pagination;
 
 use League\Fractal\Pagination\ZendFrameworkPaginatorAdapter;
@@ -16,27 +17,21 @@ class ZendFrameworkPaginatorAdapterTest extends TestCase
             'Item 31', 'Item 32', 'Item 33', 'Item 34', 'Item 35', 'Item 36', 'Item 37', 'Item 38', 'Item 39', 'Item 40',
             'Item 41', 'Item 42', 'Item 43', 'Item 44', 'Item 45', 'Item 46', 'Item 47', 'Item 48', 'Item 49', 'Item 50',
         ];
-
         $adapter = Mockery::mock('Zend\Paginator\Adapter\ArrayAdapter', [$items])->makePartial();
-
         $total = 50;
         $count = 10;
         $perPage = 10;
         $currentPage = 2;
         $lastPage = 5;
-
         $paginator = Mockery::mock('Zend\Paginator\Paginator', [$adapter])->makePartial();
-
         $paginator->shouldReceive('getCurrentPageNumber')->andReturn($currentPage);
         $paginator->shouldReceive('count')->andReturn($lastPage);
         $paginator->shouldReceive('getItemCountPerPage')->andReturn($perPage);
-
         $adapter = new ZendFrameworkPaginatorAdapter($paginator, function ($page) {
+
             return 'http://example.com/foo?page=' . $page;
         });
-
         $this->assertInstanceOf('League\Fractal\Pagination\PaginatorInterface', $adapter);
-
         $this->assertSame($currentPage, $adapter->getCurrentPage());
         $this->assertSame($lastPage, $adapter->getLastPage());
         $this->assertSame($count, $adapter->getCount());
