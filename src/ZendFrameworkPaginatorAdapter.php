@@ -23,7 +23,7 @@ class ZendFrameworkPaginatorAdapter implements PaginatorInterface
     /**
      * The paginator instance.
      *
-     * @var \Zend\Paginator\Paginator
+     * @var \Zend\Paginator\Paginator<mixed>
      */
     protected $paginator;
 
@@ -37,7 +37,7 @@ class ZendFrameworkPaginatorAdapter implements PaginatorInterface
     /**
      * Create a new zendframework pagination adapter.
      *
-     * @param \Zend\Paginator\Paginator $paginator
+     * @param \Zend\Paginator\Paginator<mixed> $paginator
      * @param callable                  $routeGenerator
      *
      * @return void
@@ -113,7 +113,7 @@ class ZendFrameworkPaginatorAdapter implements PaginatorInterface
     /**
      * Get the paginator instance.
      *
-     * @return \Zend\Paginator\Paginator
+     * @return \Zend\Paginator\Paginator<mixed>
      */
     public function getPaginator()
     {
